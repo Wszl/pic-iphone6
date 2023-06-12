@@ -25,9 +25,10 @@
       var util = layui.util;
       layer.prompt({title: 'please enter key', formType: 1}, function(pass, index){
         // get key
-        var key = pass
+        var key = pass;
+        var url_prefix = "pic-iphone6/";
         layer.close(index);
-        layui.$.get("id_index", function(data, status) {
+        layui.$.get(url_prefix + "id_index", function(data, status) {
         if (status == "success") {
           var img_count = data;
           var pagesize = Math.trunc(layui.$(window).height() / (128 + 3)) * 4
@@ -70,7 +71,7 @@
                   }
                   for(let i = 0; i < cur_page_img_count; i++ ){
                     let item_index = ( (page-1)*pagesize + i + 1 )
-                    pic_url = '/thumbnail/'+ item_index +'.thumbnail';
+                    pic_url = url_prefix + 'thumbnail/'+ item_index +'.thumbnail';
                     layui.$.get(pic_url, function(data, status) {
                       if (status == "success") {
                         layui.$("#img-" + item_index).attr("src", "data:image/png;base64," + data);
@@ -82,7 +83,7 @@
                     layui.util.on('lay-on', {
                       origin_img: function(){
                         let item_index = layui.$(this).attr("id").split("-")[1]
-                        origin_pic_url = '/data/'+ item_index;
+                        origin_pic_url = url_prefix + 'data/'+ item_index;
                         layui.$.get(origin_pic_url, function(data, status) {
                           if (status == "success") {
                             layui.layer.photos({
