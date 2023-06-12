@@ -26,7 +26,7 @@
       layer.prompt({title: 'please enter key', formType: 1}, function(pass, index){
         // get key
         var key = pass;
-        var url_prefix = "pic-iphone6/";
+        var url_prefix = "/pic-iphone6/";
         layer.close(index);
         layui.$.get(url_prefix + "id_index", function(data, status) {
         if (status == "success") {
